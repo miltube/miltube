@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MilTube Paper Core — Industrial Spiral Cardboard Cores</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gd:#2a4a1e;--gm:#3d6b2c;--ga:#5a9a3a;--gl:#8cc660;
+  --cream:#f7f3ec;--sand:#e8dfc8;--kraft:#c8a96e;--kd:#9a7a3e;
+  --white:#fefefe;--text:#1a1a14;--muted:#5a5a44;
+  --fd:'Cormorant Garamond',serif;--fb:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV & LANG SWITCHER */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(247,243,236,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,154,58,0.15)}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo-links{display:flex;align-items:center;gap:2rem}
+nav ul{list-style:none;display:flex;gap:2.2rem;align-items:center}
+nav ul a{text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+nav ul a:hover{color:var(--gd)}
+.nav-cta{background:var(--gd)!important;color:var(--white)!important;padding:.5rem 1.3rem;border-radius:6px}
+
+/* STYLE DU LOGO PERSONNALISÉ (Taille parfaite contrôlée) */
+.logo-img {
+  height: 50px;       /* Force le logo à rester petit et discret */
+  width: auto;        /* Garde les proportions d'origine sans déformer */
+  display: block;
+  object-fit: contain;
+}
+
+/* LANGUAGE SWITCHER */
+.lang-menu { display:flex; gap:.3rem; align-items:center; margin-left:1rem; border-left:1px solid var(--sand); padding-left:1.5rem; list-style:none; }
+.lang-menu a { text-decoration:none; font-size:.75rem; font-weight:600; padding:.3rem .5rem; border-radius:4px; color:var(--muted); transition:all .2s; border:1px solid transparent; letter-spacing: normal;}
+.lang-menu a:hover { color:var(--gd); border-color:var(--sand); }
+.lang-menu a.active { background:var(--gd); color:var(--white); }
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;padding-top:72px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 4rem}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(90,154,58,.12);color:var(--ga);padding:.32rem .9rem;border-radius:100px;font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.6rem;width:fit-content;border:1px solid rgba(90,154,58,.25)}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--ga);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--fd);font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:300;line-height:1.1;color:var(--gd);margin-bottom:1.4rem}
+.hero h1 strong{font-weight:600;display:block;color:var(--text)}
+.hero-desc{font-size:1rem;line-height:1.7;color:var(--muted);max-width:420px;margin-bottom:2.2rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--gd);color:var(--white);padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-size:.88rem;font-weight:500;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--gm);transform:translateY(-1px)}
+.btn-outline{border:1.5px solid var(--gd);color:var(--gd);padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-size:.88rem;font-weight:500;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{background:rgba(42,74,30,.06);transform:translateY(-1px)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.08)}
+.stat-num{font-family:var(--fd);font-size:2rem;font-weight:600;color:var(--gd);line-height:1}
+.stat-label{font-size:.76rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-top:.25rem}
+
+/* HERO RIGHT */
+.hero-right{position:relative;overflow:hidden;min-height:500px}
+.hero-photo{width:100%;height:100%;object-fit:ceovr;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(42,74,30,.35) 0%,transparent 60%)}
+.hero-badge{position:absolute;bottom:2rem;left:2rem;background:rgba(247,243,236,.92);backdrop-filter:blur(10px);padding:1rem 1.4rem;border-radius:12px;border:1px solid rgba(200,169,110,.4)}
+.hero-badge-title{font-family:var(--fd);font-size:1.1rem;font-weight:600;color:var(--gd)}
+.hero-badge-sub{font-size:.76rem;color:var(--muted);margin-top:.15rem}
+
+/* MARQUEE */
+.marquee-section{background:var(--gd);padding:1rem 0;overflow:hidden}
+.marquee-track{display:flex;gap:3rem;animation:marquee 22s linear infinite;white-space:nowrap}
+.marquee-item{font-size:.76rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);flex-shrink:0;display:flex;align-items:center;gap:1rem}
+.marquee-item::after{content:'✦';color:var(--kraft)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section{padding:6rem 4rem}
+.section-label{font-size:.74rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--ga);margin-bottom:.9rem}
+.section-title{font-family:var(--fd);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.15;color:var(--gd);margin-bottom:1.4rem}
+.section-title strong{font-weight:600}
+
+/* PHOTO GALLERY */
+.gallery{background:var(--white)}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.gallery-main{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3}
+.gallery-main img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gallery-main:hover img{transform:scale(1.03)}
+.gallery-side{display:flex;flex-direction:column;gap:1.5rem}
+.gallery-thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gallery-thumb:hover img{transform:scale(1.04)}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(20,30,10,.75));padding:1.2rem 1rem .8rem;color:var(--white);font-size:.8rem;font-weight:500;letter-spacing:.04em}
+
+/* PRODUCTS CARDS */
+.products{background:var(--cream)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--sand);margin-top:3rem;border-radius:16px;overflow:hidden}
+.product-card{background:var(--white);padding:2.2rem;transition:background .2s}
+.product-card:hover{background:var(--cream)}
+.product-size{font-family:var(--fd);font-size:3.2rem;font-weight:600;color:var(--gd);line-height:1;margin-bottom:.3rem}
+.product-unit{font-size:.83rem;color:var(--muted);margin-bottom:1.1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--sand)}
+.product-apps{font-size:.81rem;color:var(--muted);line-height:1.8}
+.product-apps strong{display:block;color:var(--text);font-size:.88rem;margin-bottom:.4rem}
+
+/* MACHINE SECTION */
+.machine{background:var(--gd);color:var(--white);padding:0}
+.machine-inner{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.machine-photo{position:relative;overflow:hidden}
+.machine-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.8}
+.machine-photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--gd))}
+.machine-content{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.machine-content .section-label{color:var(--gl)}
+.machine-content .section-title{color:var(--white)}
+.machine-content p{font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:2rem}
+.machine-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.machine-spec-item{background:rgba(255,255,255,.06);border-radius:10px;padding:1rem 1.2rem;border:1px solid rgba(255,255,255,.08)}
+.machine-spec-val{font-family:var(--fd);font-size:1.6rem;font-weight:600;color:var(--kraft);line-height:1}
+.machine-spec-key{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.3rem;letter-spacing:.04em}
+
+/* LAB SECTION */
+.lab{background:var(--cream)}
+.lab-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.lab-photos{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.lab-photo{border-radius:14px;overflow:hidden;aspect-ratio:1}
+.lab-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.lab-photo:hover img{transform:scale(1.05)}
+.lab-photo.tall{grid-column:1/-1;aspect-ratio:16/7}
+.lab-tests{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.lab-test{background:var(--white);border-radius:14px;padding:1.3rem 1.5rem;border:1px solid var(--sand);display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s}
+.lab-test:hover{border-color:var(--ga)}
+.lab-test-icon{width:42px;height:42px;background:rgba(90,154,58,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lab-test h3{font-size:.9rem;font-weight:500;margin-bottom:.25rem;color:var(--text)}
+.lab-test p{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+/* MEASUREMENTS */
+.measurements{background:var(--white)}
+.meas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.meas-card{background:var(--cream);border-radius:16px;padding:2rem;border:1px solid var(--sand);text-align:center;transition:transform .2s,box-shadow .2s}
+.meas-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
+.meas-card.highlight{background:var(--gd);border-color:transparent;color:var(--white)}
+.meas-diagram{width:80px;height:80px;margin:0 auto 1.2rem;position:relative}
+.meas-val{font-family:var(--fd);font-size:2.2rem;font-weight:600;color:var(--gd);line-height:1;margin-bottom:.3rem}
+.meas-card.highlight .meas-val{color:var(--kraft)}
+.meas-unit{font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+.meas-card.highlight .meas-unit{color:rgba(255,255,255,.5)}
+.meas-desc{font-size:.8rem;color:var(--muted);line-height:1.55}
+.meas-card.highlight .meas-desc{color:rgba(255,255,255,.6)}
+.meas-range{display:inline-block;background:rgba(90,154,58,.1);color:var(--ga);padding:.2rem .65rem;border-radius:100px;font-size:.72rem;font-weight:500;margin-top:.7rem;border:1px solid rgba(90,154,58,.2)}
+.meas-card.highlight .meas-range{background:rgba(200,169,110,.15);color:var(--kraft);border-color:rgba(200,169,110,.3)}
+
+/* SPECS TABLE */
+.specs{background:var(--cream)}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.spec-table{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--sand)}
+.spec-table-header{background:var(--gd);color:var(--white);padding:.9rem 1.5rem;font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem;border-bottom:1px solid var(--sand);font-size:.88rem}
+.spec-row:last-child{border-bottom:none}
+.spec-key{color:var(--muted)}
+.spec-val{font-weight:500;color:var(--gd);text-align:right;max-width:55%}
+.specs-features{display:flex;flex-direction:column;gap:1.2rem}
+.spec-feature{background:var(--white);border-radius:12px;padding:1.4rem;border:1px solid var(--sand);display:flex;gap:.9rem;align-items:flex-start;transition:border-color .2s}
+.spec-feature:hover{border-color:var(--gl)}
+.spec-icon{width:42px;height:42px;background:rgba(90,154,58,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.spec-feature h3{font-size:.88rem;font-weight:500;margin-bottom:.25rem}
+.spec-feature p{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+/* WHY */
+.why{background:var(--gd);color:var(--white)}
+.why .section-title{color:var(--white)}
+.why .section-label{color:var(--gl)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);margin-top:3rem;border-radius:16px;overflow:hidden}
+.why-card{background:var(--gd);padding:2rem;transition:background .2s}
+.why-card:hover{background:rgba(255,255,255,.05)}
+.why-num{font-family:var(--fd);font-size:3rem;font-weight:300;color:var(--kraft);line-height:1;margin-bottom:.7rem}
+.why-card h3{font-size:.92rem;font-weight:500;margin-bottom:.4rem}
+.why-card p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6}
+
+/* CONTACT */
+.contact{background:var(--cream)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;margin-top:3rem}
+.contact-info h3{font-family:var(--fd);font-size:1.4rem;font-weight:400;color:var(--gd);margin-bottom:1rem}
+.contact-info p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:2rem}
+.contact-detail{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;font-size:.86rem;color:var(--text)}
+.contact-detail-icon{width:34px;height:34px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-form{background:var(--white);border-radius:20px;padding:2.5rem;border:1px solid var(--sand)}
+.form-row{margin-bottom:1.1rem}
+.form-label{display:block;font-size:.76rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.form-input,.form-select,.form-textarea{width:100%;padding:.7rem 1rem;border:1.5px solid var(--sand);border-radius:8px;font-family:var(--fb);font-size:.88rem;color:var(--text);background:var(--cream);transition:border-color .2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--ga);background:var(--white)}
+.form-textarea{min-height:90px;resize:vertical}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{width:100%;background:var(--gd);color:var(--white);border:none;padding:.95rem;border-radius:8px;font-family:var(--fb);font-size:.9rem;font-weight:500;cursor:pointer;margin-top:.4rem;transition:background .2s}
+.form-submit:hover{background:var(--gm)}
+
+/* FOOTER */
+footer{background:#111107;color:rgba(255,255,255,.4);padding:3rem 4rem;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3rem}
+.footer-brand p{font-size:.8rem;line-height:1.6;margin-top:.8rem}
+.footer-col h4{font-size:.73rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.45rem;font-size:.8rem}
+.footer-col ul a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:rgba(255,255,255,.8)}
+.footer-bottom{background:#0a0a04;padding:1.1rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:.73rem;color:rgba(255,255,255,.22)}
+.cert-badge{background:rgba(255,255,255,.06);color:rgba(255,255,255,.38);padding:.28rem .65rem;border-radius:4px;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.08)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem} .logo-links{display:none}
+  .hero{grid-template-columns:1fr}.hero-right{min-height:260px}.hero-left{padding:5rem 1.5rem 3rem}
+  section{padding:4rem 1.5rem}
+  .gallery-grid,.specs-grid,.contact-wrap,.machine-inner,.lab-grid{grid-template-columns:1fr}
+  .products-grid,.meas-grid,.why-grid{grid-template-columns:1fr 1fr}
+  .machine-content{padding:3rem 1.5rem}
+  footer{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem}
+  .footer-bottom{flex-direction:column;gap:.7rem;padding:1rem 1.5rem;text-align:center}
+  .form-row-2{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <img src="logo-miltube.png" alt="MilTube Logo" class="logo-img"height="60">
+  </a>
+  <div class="logo-links">
+    <ul>
+      <li><a href="#gallery">Products</a></li>
+      <li><a href="#machine">Production</a></li>
+      <li><a href="#lab">Laboratory</a></li>
+      <li><a href="#measurements">Dimensions</a></li>
+      <li><a href="#contact" class="nav-cta">Request a Quote</a></li>
+    </ul>
+    <ul class="lang-menu">
+      <li><a href="../index.html">FR</a></li>
+      <li><a href="index.html" class="active">EN</a></li>
+      <li><a href="../ar/index.html">عربي</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Algeria · Global Export</div>
+    <h1>Industrial Precision<br><strong>Spiral Paper Cores</strong></h1>
+    <p class="hero-desc">MilTube manufactures high-performance spiral-wound cardboard cores for winding, storing, and transporting flexible industrial materials — engineered to global standards.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request a Quote →</a>
+      <a href="#measurements" class="btn-outline">View Dimensions</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Core IDs</div></div>
+      <div class="stat-item"><div class="stat-num">4m</div><div class="stat-label">Max Length</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Recyclable</div></div>
+      <div class="stat-item"><div class="stat-num">3→17</div><div class="stat-label">mm Wall</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-photo" src="hero.png" alt="Industrial cardboard cores" onerror="this.style.background='#2a4a1e';this.style.display='block'">
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-title">MilTube Paper Core</div>
+      <div class="hero-badge-sub">Mila/Zghaia, Algeria · Since 2020</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Films & Packaging</span><span class="marquee-item">Textile Industry</span>
+    <span class="marquee-item">Paper & Printing</span><span class="marquee-item">Agricultural Films</span>
+    <span class="marquee-item">Metal Coils</span><span class="marquee-item">Labels & Tapes</span>
+    <span class="marquee-item">Stretch Wrap</span><span class="marquee-item">Non-Wovens</span>
+    <span class="marquee-item">Films & Packaging</span><span class="marquee-item">Textile Industry</span>
+    <span class="marquee-item">Paper & Printing</span><span class="marquee-item">Agricultural Films</span>
+    <span class="marquee-item">Metal Coils</span><span class="marquee-item">Labels & Tapes</span>
+    <span class="marquee-item">Stretch Wrap</span><span class="marquee-item">Non-Wovens</span>
+  </div>
+</div>
+
+<section class="gallery" id="gallery">
+  <div class="reveal">
+    <p class="section-label">Our Products</p>
+    <h2 class="section-title">Spiral cardboard cores<br><strong>built for heavy-duty performance</strong></h2>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-main">
+      <img src="MilTube — Gamme Standard & Haute Résistance.png"
+           alt="Stacked cardboard cores"
+           onerror="this.src='https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80'">
+      <div class="photo-label">MilTube — Standard & High-Load Ranges</div>
+    </div>
+    <div class="gallery-side">
+      <div class="gallery-thumb">
+        <img src="Finition Kraft — Surface Standard.jpg"
+           alt="Kraft cardboard core rolls"
+           onerror="this.src='https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=700&q=80'">
+        <div class="photo-label">Kraft Finish — Smooth Surface Options</div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="Haute Résistance — Mandrins Industriels 279 mm.jpg"
+           alt="Cardboard tube manufacturing"
+           onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80'">
+        <div class="photo-label">Heavy-Duty — 279 mm Industrial Mandrels</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-grid reveal" style="margin-top:2rem">
+    <div class="product-card">
+      <div class="product-size">50 · 60</div>
+      <div class="product-unit">mm inside diameter — Small Format</div>
+      <div class="product-apps"><strong>Applications</strong>Labels, adhesive tapes, stretch film, food packaging foil rewinding.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-size">76 · 100</div>
+      <div class="product-unit">mm · Industry Standard (3")</div>
+      <div class="product-apps"><strong>Applications</strong>Wide-format printing, general film winding, industrial packaging wrap.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-size">152 · 279</div>
+      <div class="product-unit">mm · High Resistance (6" / 11")</div>
+      <div class="product-apps"><strong>Applications</strong>Agricultural plastics, heavy textiles, mill-sized paper rolls, steel/metal coils.</div>
+    </div>
+  </div>
+</section>
+
+<section class="machine" id="machine" style="background:var(--gd)">
+  <div class="machine-inner">
+    <div class="machine-photo">
+      <img src="technologe spiral.png"
+           alt="Spiral tube winding machine line"
+           onerror="this.style.background='#1a3012'">
+      <div class="machine-photo-overlay"></div>
+    </div>
+    <div class="machine-content reveal">
+      <p class="section-label">Production</p>
+      <h2 class="section-title" style="color:white;font-size:2.5rem">Precision spiral<br><strong>winding technology</strong></h2>
+      <p>Our cores are manufactured by spiral-winding multiple layers of premium Kraft and testliner board, bonded with high-grade silicate or vinyl adhesives. Each tube is clean-cut to custom length and fully dimensionally stabilized.</p>
+      <div class="machine-specs">
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">4,000</div>
+          <div class="machine-spec-key">mm max cut length</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">±1.5</div>
+          <div class="machine-spec-key">mm length tolerance</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">3–17</div>
+          <div class="machine-spec-key">mm wall thickness range</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">100%</div>
+          <div class="machine-spec-key">recyclable material</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="lab">
+  <div class="reveal">
+    <p class="section-label">Quality Control</p>
+    <h2 class="section-title">In-house laboratory<br><strong>certified core strength</strong></h2>
+  </div>
+  <div class="lab-grid">
+    <div class="lab-photos reveal">
+      <div class="lab-photo tall">
+        <img src="laboratory3.png"
+             alt="Quality control testing lab"
+             onerror="this.style.background='#c8a96e'">
+      </div>
+      <div class="lab-photo">
+        <img src="laboratory1.jpg"
+             alt="Crush test machine"
+             onerror="this.style.background='#5a9a3a'">
+      </div>
+      <div class="lab-photo">
+        <img src="laboratory2.png"
+             alt="Dimensional measurement tools"
+             onerror="this.style.background='#3d6b2c'">
+      </div>
+    </div>
+    <div class="lab-content reveal">
+      <p style="font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:.5rem">
+        Every single production batch undergoes rigorous laboratory checks before leaving our plant. We test mechanical load limits, exact dimensional tolerances, and optimal moisture content — ensuring failure-free winding on your conversion lines.
+      </p>
+      <div class="lab-tests">
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="3"/>
+              <path d="M11 3v2M11 17v2M3 11h2M17 11h2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Radial Crush Resistance</h3>
+            <p>Measures core resistance against gripping forces applied during high-tension winding. Vital for high-speed converters.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <rect x="4" y="3" width="14" height="16" rx="2"/>
+              <path d="M8 8h6M8 12h4"/>
+              <path d="M11 19v2M11 1v2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Axial Compression Test</h3>
+            <p>Validates load capacity for vertical storage and stacking. Prevents core deformation during warehousing.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <path d="M3 19h16M7 19V9l4-6 4 6v10"/>
+              <path d="M9 19v-4h4v4"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Dimensional Stability</h3>
+            <p>Cores are thermally conditioned and measured for straightness (max 1.5 mm/m) to counter ambient humidity shifts.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <path d="M6 2v10l5 3 5-3V2"/><path d="M6 7h10"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Moisture Management</h3>
+            <p>Maintained strictly between 8–10% for optimal structural core integrity. Monitored via calibrated digital hygrometers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="measurements" id="measurements">
+  <div class="reveal">
+    <p class="section-label">Dimensions & Tolerances</p>
+    <h2 class="section-title">Every dimension is<br><strong>engineered to specification</strong></h2>
+  </div>
+  <div class="meas-grid reveal">
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="34" stroke="#e8dfc8" stroke-width="12" fill="none"/>
+          <circle cx="40" cy="40" r="18" stroke="#5a9a3a" stroke-width="3" fill="none" stroke-dasharray="4 3"/>
+          <line x1="22" y1="40" x2="58" y2="40" stroke="#2a4a1e" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="40" cy="40" r="2" fill="#2a4a1e"/>
+          <text x="40" y="27" text-anchor="middle" font-size="7" fill="#5a5a44" font-family="DM Sans">⌀ ID</text>
+        </svg>
+      </div>
+      <div class="meas-val">50–279</div>
+      <div class="meas-unit">mm Inside Diameter</div>
+      <div class="meas-desc">6 standard sizes: 50, 60, 76, 100, 152, 279 mm. Custom tailoring available on demand.</div>
+      <span class="meas-range">6 standard sizes</span>
+    </div>
+
+    <div class="meas-card highlight">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="34" stroke="rgba(200,169,110,0.5)" stroke-width="14" fill="none"/>
+          <circle cx="40" cy="40" r="20" stroke="rgba(200,169,110,0.9)" stroke-width="2" fill="none"/>
+          <line x1="40" y1="6" x2="40" y2="26" stroke="#c8a96e" stroke-width="1.5"/>
+          <line x1="40" y1="54" x2="40" y2="74" stroke="#c8a96e" stroke-width="1.5"/>
+          <text x="47" y="40" font-size="6.5" fill="#c8a96e" font-family="DM Sans" dominant-baseline="middle">wall</text>
+        </svg>
+      </div>
+      <div class="meas-val">3–17</div>
+      <div class="meas-unit">mm Wall Thickness</div>
+      <div class="meas-desc">From 3 mm for lightweight film wrappers up to 17 mm for high-capacity industrial applications requiring extreme core strength.</div>
+      <span class="meas-range">Lightweight → Heavy-Duty</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <rect x="15" y="25" width="50" height="30" rx="4" stroke="#e8dfc8" stroke-width="2" fill="none"/>
+          <rect x="20" y="30" width="40" height="20" rx="3" stroke="#5a9a3a" stroke-width="2" fill="none"/>
+          <line x1="15" y1="68" x2="65" y2="68" stroke="#2a4a1e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="15" y1="63" x2="15" y2="73" stroke="#2a4a1e" stroke-width="1.5"/>
+          <line x1="65" y1="63" x2="65" y2="73" stroke="#2a4a1e" stroke-width="1.5"/>
+          <text x="40" y="76" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="DM Sans">Length</text>
+        </svg>
+      </div>
+      <div class="meas-val">10–4000</div>
+      <div class="meas-unit">mm Cut Length</div>
+      <div class="meas-desc">From 10 mm short rings to 4,000 mm (4 m) heavy master-log mandrels. Precised to your setup requirements.</div>
+      <span class="meas-range">Tolerance ±1.5 mm</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <line x1="20" y1="20" x2="60" y2="60" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="20" y1="22" x2="20" y2="18" stroke="#2a4a1e" stroke-width="1.5"/>
+          <line x1="60" y1="62" x2="60" y2="58" stroke="#2a4a1e" stroke-width="1.5"/>
+          <circle cx="38" cy="44" r="3" fill="rgba(90,154,58,.2)" stroke="#5a9a3a" stroke-width="1.5"/>
+          <text x="40" y="18" text-anchor="middle" font-size="7" fill="#5a5a44" font-family="DM Sans">straightness</text>
+        </svg>
+      </div>
+      <div class="meas-val">≤1.5</div>
+      <div class="meas-unit">mm / linear meter</div>
+      <div class="meas-desc">Guaranteed maximum straightness deviation. Verified using precision line-testing profiles on every batch.</div>
+      <span class="meas-range">Straightness Bound</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <path d="M20 55 Q40 20 60 55" stroke="#5a9a3a" stroke-width="2" fill="none"/>
+          <line x1="20" y1="55" x2="60" y2="55" stroke="#e8dfc8" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="30" cy="44" r="3" fill="#5a9a3a"/>
+          <circle cx="50" cy="44" r="3" fill="#5a9a3a"/>
+          <text x="40" y="70" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="DM Sans">moisture %</text>
+        </svg>
+      </div>
+      <div class="meas-val">4–6</div>
+      <div class="meas-unit">% Moisture Content</div>
+      <div class="meas-desc">Controlled humidity range ensuring structural core stability and keeping the profile safe from dimensional warping.</div>
+      <span class="meas-range">Batch Audited</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <rect x="20" y="15" width="40" height="50" rx="3" stroke="#e8dfc8" stroke-width="2" fill="none"/>
+          <path d="M20 30h40M20 45h40" stroke="#e8dfc8" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M30 15v50M50 15v50" stroke="#5a9a3a" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="40" cy="40" r="5" fill="rgba(90,154,58,.15)" stroke="#5a9a3a" stroke-width="1.5"/>
+          <text x="40" y="72" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="DM Sans">composition</text>
+        </svg>
+      </div>
+      <div class="meas-val">100%</div>
+      <div class="meas-unit">Recyclable Cellulose</div>
+      <div class="meas-desc">Pure Kraft and testliner fibers. Organic additives only. Fully recyclable and biodegradable — fitting EU ecological framework profiles.</div>
+      <span class="meas-range">Eco-Certified Stock</span>
+    </div>
+  </div>
+</section>
+
+<section class="specs" id="specs">
+  <div class="reveal">
+    <p class="section-label">Full Technical Specifications</p>
+    <h2 class="section-title">Core technical<br><strong>data sheet</strong></h2>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-table reveal">
+      <div class="spec-table-header">Technical Properties</div>
+      <div class="spec-row"><span class="spec-key">Inside Diameters (ID)</span><span class="spec-val">50 / 60 / 76 / 100 / 152 / 279 mm</span></div>
+      <div class="spec-row"><span class="spec-key">Wall Thickness</span><span class="spec-val">3 mm – 17 mm</span></div>
+      <div class="spec-row"><span class="spec-key">Cut Length Range</span><span class="spec-val">10 mm – 4,000 mm</span></div>
+      <div class="spec-row"><span class="spec-key">Length Tolerance</span><span class="spec-val">± 1.5 mm</span></div>
+      <div class="spec-row"><span class="spec-key">Max Straightness Deviation</span><span class="spec-val">1.5 mm / m</span></div>
+      <div class="spec-row"><span class="spec-key">Moisture Target Range</span><span class="spec-val">4% – 6%</span></div>
+      <div class="spec-row"><span class="spec-key">Core Material Stock</span><span class="spec-val">100% Recyclable Kraft / Testliner</span></div>
+      <div class="spec-row"><span class="spec-key">Bonding Adhesive</span><span class="spec-val">Silicate or Vinyl Base (High-cohesion)</span></div>
+      <div class="spec-row"><span class="spec-key">Surface Finish Options</span><span class="spec-val">Standard Kraft Skived · Ground (Optional)</span></div>
+      <div class="spec-row"><span class="spec-key">Winding Architecture</span><span class="spec-val">Spiral Wound Construction</span></div>
+    </div>
+    <div class="specs-features reveal">
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="3"/></svg></div>
+        <div><h3>Radial Crush Strength</h3><p>Resists clamping and squeezing forces during fast rewinding. In-house hydraulic lab tested.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><rect x="4" y="6" width="14" height="12" rx="2"/><path d="M4 10h14M11 10v8"/></svg></div>
+        <div><h3>Axial Stacking Load</h3><p>Supports weight during high-tier vertical warehousing. Up to 17 mm walls for extreme configurations.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><path d="M11 3v3M11 16v3M4 7.5l2.5 1.5M15.5 13l2.5 1.5M4 14.5l2.5-1.5M15.5 9l2.5-1.5"/></svg></div>
+        <div><h3>Moisture Conditioning</h3><p>Oven-conditioned to freeze structural core metrics against harsh logistics environment factors.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><path d="M4 4h14M4 8h8M4 12h4"/><circle cx="16" cy="15" r="4"/><path d="M16 12.5v2.5l1.5 1.5"/></svg></div>
+        <div><h3>Precision Cut Options</h3><p>Any exact dimension slice from 10 mm to 4 meters. Automated target cuts bounding error to ± 1.5 mm.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="reveal">
+    <p class="section-label">Why MilTube</p>
+    <h2 class="section-title">Reliable core supply<br><strong>spanning global markets</strong></h2>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-card"><div class="why-num">01</div><h3>Lab-Tested Quality</h3><p>Radial strength, axial load capacity, and optimal moisture metrics verified prior to plant exit.</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>100% Eco-Friendly</h3><p>Pure recyclable cellulose core construction. Sourced and processed matching global sustainability frameworks.</p></div>
+    <div class="why-card"><div class="why-num">03</div><h3>Fully Custom Sizing</h3><p>IDs 50–279 mm, walls 3–17 mm, cuts up to 4m. Manufactured precisely to your machinery profile.</p></div>
+    <div class="why-card"><div class="why-num">04</div><h3>Export Engineered</h3><p>Proudly produced in Algeria matching international rules. Agile pricing and reliable maritime container logistics.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Contact & Quotes</p>
+    <h2 class="section-title">Request a corporate quote<br><strong>for your transformation plant</strong></h2>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <h3>Tell us your exact core requirements</h3>
+      <p>Specify your required Inside Diameter, wall gauge thickness, cut lengths, and volume metrics. Our sales engineering office delivers complete pricing within 24 to 48 hours.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M1 4l7 5 7-5"/></svg></div>
+        contact@miltube.com
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 2h4l1.5 3L5.5 6.2a7.5 7.5 0 004.3 4.3L11 8.5 14 10v4a1 1 0 01-1 1C5 15 1 11 1 3a1 1 0 011-1z"/></svg></div>
+        +213 (0) — — — — — —
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="6" r="2.5"/><path d="M8 1C5.2 1 3 3.2 3 6c0 3.5 5 9 5 9s5-5.5 5-9c0-2.8-2.2-5-5-5z"/></svg></div>
+        Mila/Zghaia, Algeria
+      </div>
+      <div style="margin-top:2rem;padding:1.4rem;background:rgba(90,154,58,.08);border-radius:12px;border:1px solid rgba(90,154,58,.2)">
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.6;margin:0"><strong style="display:block;color:var(--gd);margin-bottom:.3rem">Export Documentation Ready</strong>All shipments are systematically accompanied by certified technical data sheets, customs layout packs, and compliant packing lists.</p>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row-2">
+        <div class="form-row"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John"></div>
+        <div class="form-row"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe"></div>
+      </div>
+      <div class="form-row"><label class="form-label">Company Name</label><input type="text" class="form-input" placeholder="Your corporate name"></div>
+      <div class="form-row"><label class="form-label">Destination Country</label>
+        <select class="form-select">
+          <option>Select target country…</option>
+          <option>Algeria</option><option>Morocco</option><option>Tunisia</option>
+          <option>France</option><option>Germany</option><option>Spain</option>
+          <option>Italy</option><option>United Kingdom</option><option>Belgium</option>
+          <option>Netherlands</option><option>Turkey</option><option>Egypt</option>
+          <option>Saudi Arabia</option><option>UAE</option><option>Senegal</option>
+          <option>Ivory Coast</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-row-2">
+        <div class="form-row"><label class="form-label">Required Core ID</label>
+          <select class="form-select">
+            <option>50 mm</option><option>60 mm</option><option>76 mm (3")</option>
+            <option>100 mm</option><option>152 mm (6")</option><option>279 mm (11")</option>
+          </select>
+        </div>
+        <div class="form-row"><label class="form-label">Volume Quantity (Units)</label><input type="number" class="form-input" placeholder="e.g. 5000"></div>
+      </div>
+      <div class="form-row"><label class="form-label">Target Wall Thickness (mm)</label><input type="text" class="form-input" placeholder="e.g. 7 mm"></div>
+      <div class="form-row"><label class="form-label">Exact Cut Length (mm)</label><input type="text" class="form-input" placeholder="e.g. 1500 mm"></div>
+      <div class="form-row"><label class="form-label">Message / Special Application Instructions</label><textarea class="form-textarea" placeholder="Detail your winding application, specific surface preferences (skived/ground), or custom metrics…"></textarea></div>
+      <button class="form-submit" onclick="alert('Thank you! Your quote request has been routed to our commercial office. We will contact you within 24–48 hours.')">Submit Quote Request →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="logo" style="margin-bottom:1rem; display:inline-block;">
+      <img src="logo-miltube.png" alt="MilTube Logo" class="logo-img">
+    </a>
+    <p>Spiral-wound cardboard cores manufactured in Algeria to international industrial standards. Supplying converters, packagers, and manufacturers worldwide.</p>
+    <div style="display:flex;gap:.7rem;margin-top:1.1rem">
+      <span class="cert-badge">100% Recyclable</span>
+      <span class="cert-badge">Export Ready</span>
+      <span class="cert-badge">Lab Tested</span>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Products</h4>
+    <ul>
+      <li><a href="#">50 / 60 mm Cores</a></li>
+      <li><a href="#">76 mm (3") Cores</a></li>
+      <li><a href="#">100 mm Cores</a></li>
+      <li><a href="#">152 mm (6") Cores</a></li>
+      <li><a href="#">279 mm (11") Cores</a></li>
+      <li><a href="#">Custom Dimensions</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About MilTube</a></li>
+      <li><a href="#">Laboratory & Quality</a></li>
+      <li><a href="#">Technical Data Sheet</a></li>
+      <li><a href="#">Export & Shipping</a></li>
+      <li><a href="#">Request a Quote</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 MilTube Paper Core — Mila/Zghaia, Algeria</span>
+  <span>Spiral-wound cardboard cores · Global export</span>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

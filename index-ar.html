@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MilTube — أنابيب كرتون حلزونية صناعية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gd:#2a4a1e;--gm:#3d6b2c;--ga:#5a9a3a;--gl:#8cc660;
+  --cream:#f7f3ec;--sand:#e8dfc8;--kraft:#c8a96e;--kd:#9a7a3e;
+  --white:#fefefe;--text:#1a1a14;--muted:#5a5a44;
+  --fd:'Cairo', sans-serif;--fb:'Cairo', sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV & LANG SWITCHER */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(247,243,236,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,154,58,0.15)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-icon{width:auto;height:auto;background:var(--gd);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo-text{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:var(--gd);letter-spacing:.02em}
+.logo-text span{color:var(--ga);font-weight:400}
+.nav-links{display:flex;align-items:center;gap:2rem}
+nav ul{list-style:none;display:flex;gap:2.2rem;align-items:center}
+nav ul a{text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+nav ul a:hover{color:var(--gd)}
+.nav-cta{background:var(--gd)!important;color:var(--white)!important;padding:.5rem 1.3rem;border-radius:6px}
+
+/* SELECTEUR DE LANGUE */
+.lang-menu { display:flex; gap:.3rem; align-items:center; margin-right:1rem; border-right:1px solid var(--sand); padding-right:1.5rem; list-style:none; }
+.lang-menu a { text-decoration:none; font-size:.8rem; font-weight:700; padding:.3rem .5rem; border-radius:4px; color:var(--muted); transition:all .2s; border:1px solid transparent; letter-spacing: normal;}
+.lang-menu a:hover { color:var(--gd); border-color:var(--sand); }
+.lang-menu a.active { background:var(--gd); color:var(--white); }
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;padding-top:72px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 4rem}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(90,154,58,.12);color:var(--ga);padding:.32rem .9rem;border-radius:100px;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.6rem;width:fit-content;border:1px solid rgba(90,154,58,.25)}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--ga);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--fd);font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:400;line-height:1.25;color:var(--gd);margin-bottom:1.4rem}
+.hero h1 strong{font-weight:700;display:block;color:var(--text)}
+.hero-desc{font-size:1.05rem;line-height:1.8;color:var(--muted);max-width:420px;margin-bottom:2.2rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--gd);color:var(--white);padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:600;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--gm);transform:translateY(-1px)}
+.btn-outline{border:1.5px solid var(--gd);color:var(--gd);padding:.85rem 1.8rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:600;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-outline:hover{background:rgba(42,74,30,.06);transform:translateY(-1px)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(0,0,0,.08)}
+.stat-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--gd);line-height:1; direction: ltr; text-align: right;}
+.stat-label{font-size:.8rem;font-weight:600;color:var(--muted);letter-spacing:.02em;text-transform:uppercase;margin-top:.4rem}
+
+/* HERO RIGHT — photo */
+.hero-right{position:relative;overflow:hidden;min-height:500px}
+.hero-photo{width:100%;height:100%;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(225deg,rgba(42,74,30,.35) 0%,transparent 60%)}
+.hero-badge{position:absolute;bottom:2rem;left:2rem;background:rgba(247,243,236,.92);backdrop-filter:blur(10px);padding:1rem 1.4rem;border-radius:12px;border:1px solid rgba(200,169,110,.4)}
+.hero-badge-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--gd)}
+.hero-badge-sub{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+
+/* MARQUEE */
+.marquee-section{background:var(--gd);padding:1rem 0;overflow:hidden;direction:ltr}
+.marquee-track{display:flex;gap:3rem;animation:marquee 22s linear infinite;white-space:nowrap}
+.marquee-item{font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.5);flex-shrink:0;display:flex;align-items:center;gap:1rem; direction:rtl}
+.marquee-item::after{content:'✦';color:var(--kraft)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section{padding:6rem 4rem}
+.section-label{font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ga);margin-bottom:.9rem}
+.section-title{font-family:var(--fd);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.2;color:var(--gd);margin-bottom:1.4rem}
+.section-title strong{font-weight:700}
+
+/* PHOTO GALLERY — Products */
+.gallery{background:var(--white)}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.gallery-main{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3}
+.gallery-main img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gallery-main:hover img{transform:scale(1.03)}
+.gallery-side{display:flex;flex-direction:column;gap:1.5rem}
+.gallery-thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gallery-thumb:hover img{transform:scale(1.04)}
+.photo-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(20,30,10,.75));padding:1.2rem 1rem .8rem;color:var(--white);font-size:.85rem;font-weight:600;letter-spacing:.02em}
+
+/* PRODUCTS CARDS */
+.products{background:var(--cream)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--sand);margin-top:3rem;border-radius:16px;overflow:hidden}
+.product-card{background:var(--white);padding:2.2rem;transition:background .2s}
+.product-card:hover{background:var(--cream)}
+.product-size{font-family:var(--fd);font-size:3.2rem;font-weight:700;color:var(--gd);line-height:1;margin-bottom:.3rem; direction:ltr; text-align:right}
+.product-unit{font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:1.1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--sand)}
+.product-apps{font-size:.85rem;color:var(--muted);line-height:1.8}
+.product-apps strong{display:block;color:var(--text);font-size:.9rem;font-weight:700;margin-bottom:.4rem}
+
+/* MACHINE SECTION */
+.machine{background:var(--gd);color:var(--white);padding:0}
+.machine-inner{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.machine-photo{position:relative;overflow:hidden}
+.machine-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.8}
+.machine-photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,var(--gd) 0%, transparent 60%)}
+.machine-content{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.machine-content .section-label{color:var(--gl)}
+.machine-content .section-title{color:var(--white)}
+.machine-content p{font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:2rem}
+.machine-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.machine-spec-item{background:rgba(255,255,255,.06);border-radius:10px;padding:1rem 1.2rem;border:1px solid rgba(255,255,255,.08)}
+.machine-spec-val{font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--kraft);line-height:1;direction:ltr;text-align:right}
+.machine-spec-key{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.4rem;letter-spacing:.02em}
+
+/* LAB SECTION */
+.lab{background:var(--cream)}
+.lab-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.lab-photos{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.lab-photo{border-radius:14px;overflow:hidden;aspect-ratio:1}
+.lab-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.lab-photo:hover img{transform:scale(1.05)}
+.lab-photo.tall{grid-column:1/-1;aspect-ratio:16/7}
+.lab-content{}
+.lab-tests{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.lab-test{background:var(--white);border-radius:14px;padding:1.3rem 1.5rem;border:1px solid var(--sand);display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s}
+.lab-test:hover{border-color:var(--ga)}
+.lab-test-icon{width:42px;height:42px;background:rgba(90,154,58,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lab-test h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem;color:var(--text)}
+.lab-test p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* MEASUREMENTS */
+.measurements{background:var(--white)}
+.meas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.meas-card{background:var(--cream);border-radius:16px;padding:2rem;border:1px solid var(--sand);text-align:center;transition:transform .2s,box-shadow .2s}
+.meas-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
+.meas-card.highlight{background:var(--gd);border-color:transparent;color:var(--white)}
+.meas-diagram{width:80px;height:80px;margin:0 auto 1.2rem;position:relative}
+.meas-val{font-family:var(--fd);font-size:2.2rem;font-weight:700;color:var(--gd);line-height:1;margin-bottom:.3rem;direction:ltr}
+.meas-card.highlight .meas-val{color:var(--kraft)}
+.meas-unit{font-size:.85rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+.meas-card.highlight .meas-unit{color:rgba(255,255,255,.6)}
+.meas-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.meas-card.highlight .meas-desc{color:rgba(255,255,255,.7)}
+.meas-range{display:inline-block;background:rgba(90,154,58,.1);color:var(--ga);padding:.2rem .65rem;border-radius:100px;font-size:.8rem;font-weight:600;margin-top:.8rem;border:1px solid rgba(90,154,58,.2)}
+.meas-card.highlight .meas-range{background:rgba(200,169,110,.15);color:var(--kraft);border-color:rgba(200,169,110,.3)}
+
+/* SPECS TABLE */
+.specs{background:var(--cream)}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.spec-table{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--sand)}
+.spec-table-header{background:var(--gd);color:var(--white);padding:.9rem 1.5rem;font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem;border-bottom:1px solid var(--sand);font-size:.88rem}
+.spec-row:last-child{border-bottom:none}
+.spec-key{color:var(--muted); font-weight: 500;}
+.spec-val{font-weight:700;color:var(--gd);text-align:left;max-width:55%; direction: ltr;}
+.specs-features{display:flex;flex-direction:column;gap:1.2rem}
+.spec-feature{background:var(--white);border-radius:12px;padding:1.4rem;border:1px solid var(--sand);display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s}
+.spec-feature:hover{border-color:var(--gl)}
+.spec-icon{width:42px;height:42px;background:rgba(90,154,58,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.spec-feature h3{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.spec-feature p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* WHY */
+.why{background:var(--gd);color:var(--white)}
+.why .section-title{color:var(--white)}
+.why .section-label{color:var(--gl)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);margin-top:3rem;border-radius:16px;overflow:hidden}
+.why-card{background:var(--gd);padding:2rem;transition:background .2s}
+.why-card:hover{background:rgba(255,255,255,.05)}
+.why-num{font-family:var(--fd);font-size:3rem;font-weight:400;color:var(--kraft);line-height:1;margin-bottom:.7rem}
+.why-card h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.why-card p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6}
+
+/* CONTACT */
+.contact{background:var(--cream)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;margin-top:3rem}
+.contact-info h3{font-family:var(--fd);font-size:1.6rem;font-weight:600;color:var(--gd);margin-bottom:1rem}
+.contact-info p{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.contact-detail{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;font-size:.9rem;color:var(--text); font-weight: 500;}
+.contact-detail-icon{width:34px;height:34px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-form{background:var(--white);border-radius:20px;padding:2.5rem;border:1px solid var(--sand)}
+.form-row{margin-bottom:1.1rem}
+.form-label{display:block;font-size:.8rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
+.form-input,.form-select,.form-textarea{width:100%;padding:.7rem 1rem;border:1.5px solid var(--sand);border-radius:8px;font-family:var(--fb);font-size:.9rem;color:var(--text);background:var(--cream);transition:border-color .2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--ga);background:var(--white)}
+.form-textarea{min-height:90px;resize:vertical}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{width:100%;background:var(--gd);color:var(--white);border:none;padding:.95rem;border-radius:8px;font-family:var(--fb);font-size:.95rem;font-weight:700;cursor:pointer;margin-top:.4rem;transition:background .2s}
+.form-submit:hover{background:var(--gm)}
+
+/* FOOTER */
+footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3rem}
+.footer-brand p{font-size:.85rem;line-height:1.7;margin-top:.8rem}
+.footer-col h4{font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem;font-size:.85rem}
+.footer-col ul a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.footer-col ul a:hover{color:rgba(255,255,255,.9)}
+.footer-bottom{background:#0a0a04;padding:1.1rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:rgba(255,255,255,.3)}
+.cert-badge{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);padding:.35rem .7rem;border-radius:4px;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;border:1px solid rgba(255,255,255,.08)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem} .nav-links{display:none}
+  .hero{grid-template-columns:1fr}.hero-right{min-height:260px}.hero-left{padding:5rem 1.5rem 3rem}
+  section{padding:4rem 1.5rem}
+  .gallery-grid,.specs-grid,.contact-wrap,.machine-inner,.lab-grid{grid-template-columns:1fr}
+  .products-grid,.meas-grid,.why-grid{grid-template-columns:1fr 1fr}
+  .machine-content{padding:3rem 1.5rem}
+  footer{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem}
+  .footer-bottom{flex-direction:column;gap:.7rem;padding:1rem 1.5rem;text-align:center}
+  .form-row-2{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="#" class="logo">
+    <img src="logo-miltube.png" alt="شعار MilTube" class="logo-img" height="60">
+  </a>
+  <div class="nav-links">
+    <ul>
+      <li><a href="#gallery">المنتجات</a></li>
+      <li><a href="#machine">الإنتاج</a></li>
+      <li><a href="#lab">المختبر</a></li>
+      <li><a href="#measurements">الأبعاد</a></li>
+      <li><a href="#contact" class="nav-cta">طلب عرض سعر</a></li>
+    </ul>
+    <ul class="lang-menu">
+      <li><a href="index.html">FR</a></li>
+      <li><a href="index-En.html">EN</a></li>
+      <li><a href="index-ar.html" class="active">عربي</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">الجزائر · تصدير عالمي</div>
+    <h1>أنابيب كرتونية<br><strong>ذات دقة صناعية</strong></h1>
+    <p class="hero-desc">تصنع شركة MilTube أنابيب كرتون حلزونية عالية الأداء للف، وتخزين، ونقل المواد الصناعية المرنة — مصممة وفقاً للمعايير العالمية.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">← طلب عرض سعر</a>
+      <a href="#measurements" class="btn-outline">عرض الأبعاد</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">أقطار قياسية</div></div>
+      <div class="stat-item"><div class="stat-num">4m</div><div class="stat-label">أقصى طول</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">قابلة لإعادة التدوير</div></div>
+      <div class="stat-item"><div class="stat-num">3→17</div><div class="stat-label">ملم سُمك</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-photo" src="hero.png" alt="أنابيب كرتون صناعية" onerror="this.style.background='#2a4a1e';this.style.display='block'">
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-title">MilTube للأنابيب الكرتونية</div>
+      <div class="hero-badge-sub">زغاية/ميلة، الجزائر · منذ 2025</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">أفلام وتغليف</span><span class="marquee-item">صناعة النسيج</span>
+    <span class="marquee-item">ورق وطباعة</span><span class="marquee-item">أفلام زراعية</span>
+    <span class="marquee-item">لفائف معدنية</span><span class="marquee-item">ملصقات ومواد لاصقة</span>
+    <span class="marquee-item">فيلم تغليف مطاطي</span><span class="marquee-item">أقمشة غير منسوجة</span>
+    <span class="marquee-item">أفلام وتغليف</span><span class="marquee-item">صناعة النسيج</span>
+    <span class="marquee-item">ورق وطباعة</span><span class="marquee-item">أفلام زراعية</span>
+    <span class="marquee-item">لفائف معدنية</span><span class="marquee-item">ملصقات ومواد لاصقة</span>
+    <span class="marquee-item">فيلم تغليف مطاطي</span><span class="marquee-item">أقمشة غير منسوجة</span>
+  </div>
+</div>
+
+<section class="gallery" id="gallery">
+  <div class="reveal">
+    <p class="section-label">منتجاتنا</p>
+    <h2 class="section-title">أنابيب كرتونية حلزونية<br><strong>مصممة للأداء العالي</strong></h2>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-main">
+      <img src="MilTube — Gamme Standard & Haute Résistance.png"
+           alt="أنابيب كرتون مكدسة"
+           onerror="this.src='https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80'">
+      <div class="photo-label">MilTube — الفئة القياسية وعالية المقاومة</div>
+    </div>
+    <div class="gallery-side">
+      <div class="gallery-thumb">
+        <img src="Finition Kraft — Surface Standard.jpg"
+           alt="بكرات من أنابيب كرتون الكرافت"
+           onerror="this.src='https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=700&q=80'">
+        <div class="photo-label">تشطيب كرافت — سطح قياسي</div>
+      </div>
+      <div class="gallery-thumb">
+        <img src="Haute Résistance — Mandrins Industriels 279 mm.jpg"
+           alt="تصنيع أنابيب الكرتون"
+           onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80'">
+        <div class="photo-label">مقاومة عالية — أنابيب صناعية 279 ملم</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-grid reveal" style="margin-top:2rem">
+    <div class="product-card">
+      <div class="product-size">50 · 60</div>
+      <div class="product-unit">ملم القطر الداخلي — حجم صغير</div>
+      <div class="product-apps"><strong>التطبيقات</strong>الملصقات، الأشرطة اللاصقة، أفلام التغليف المطاطية (ستريتش)، أفلام التغليف الغذائي.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-size">76 · 100</div>
+      <div class="product-unit">ملم · معيار صناعي (3 بوصة)</div>
+      <div class="product-apps"><strong>التطبيقات</strong>الطباعة ذات التنسيق العريض، اللف العام للأفلام، التغليف الصناعي.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-size">152 · 279</div>
+      <div class="product-unit">ملم · مقاومة عالية (6" / 11")</div>
+      <div class="product-apps"><strong>التطبيقات</strong>الأفلام الزراعية، النسيج، بكرات الورق الأم، اللفائف المعدنية.</div>
+    </div>
+  </div>
+</section>
+
+<section class="machine" id="machine" style="background:var(--gd)">
+  <div class="machine-inner">
+    <div class="machine-photo">
+      <img src="technologe spiral.png"
+           alt="خط إنتاج الأنابيب الحلزونية"
+           onerror="this.style.background='#1a3012'">
+      <div class="machine-photo-overlay"></div>
+    </div>
+    <div class="machine-content reveal">
+      <p class="section-label">الإنتاج</p>
+      <h2 class="section-title" style="color:white;font-size:2.5rem">تكنولوجيا<br><strong>اللف الحلزوني الدقيق</strong></h2>
+      <p>تُصنع أنابيبنا عن طريق اللف الحلزوني لشرائح كرتون الكرافت والتستلاينر، ملصقة بمواد لاصقة سيليكاتية أو فينيلية عالية الأداء. يتم قطع كل أنبوب بدقة وضمان استقرار أبعاده.</p>
+      <div class="machine-specs">
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">4 000</div>
+          <div class="machine-spec-key">ملم أقصى طول للقطع</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">±1.5</div>
+          <div class="machine-spec-key">ملم نسبة التفاوت في القطع</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">3–17</div>
+          <div class="machine-spec-key">ملم سُمك الجدار</div>
+        </div>
+        <div class="machine-spec-item">
+          <div class="machine-spec-val">100%</div>
+          <div class="machine-spec-key">مادة قابلة لإعادة التدوير</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="lab">
+  <div class="reveal">
+    <p class="section-label">مراقبة الجودة</p>
+    <h2 class="section-title">مختبر داخلي<br><strong>بأداء معتمد</strong></h2>
+  </div>
+  <div class="lab-grid">
+    <div class="lab-photos reveal">
+      <div class="lab-photo tall">
+        <img src="laboratory3.png"
+             alt="اختبارات مراقبة الجودة في المختبر"
+             onerror="this.style.background='#c8a96e'">
+      </div>
+      <div class="lab-photo">
+        <img src="Laboratory1.jpg"
+             alt="آلة اختبار الضغط"
+             onerror="this.style.background='#5a9a3a'">
+      </div>
+      <div class="lab-photo">
+        <img src="laboratory2.png"
+             alt="أدوات قياس الأبعاد"
+             onerror="this.style.background='#3d6b2c'">
+      </div>
+    </div>
+    <div class="lab-content reveal">
+      <p style="font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:.5rem">
+        تمر كل دفعة إنتاج عبر مختبر مراقبة الجودة الخاص بنا قبل التسليم. نقوم باختبار المقاومة الميكانيكية، الدقة في الأبعاد ونسبة الرطوبة — مما يضمن أداءً ثابتًا على خطوط اللف الخاصة بك.
+      </p>
+      <div class="lab-tests">
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="3"/>
+              <path d="M11 3v2M11 17v2M3 11h2M17 11h2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>اختبار الضغط الشعاعي</h3>
+            <p>يقيس مقاومة قوة الشد المطبقة أثناء اللف. ضروري لخطوط التحويل عالية السرعة.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <rect x="4" y="3" width="14" height="16" rx="2"/>
+              <path d="M8 8h6M8 12h4"/>
+              <path d="M11 19v2M11 1v2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>اختبار الضغط المحوري</h3>
+            <p>يتحقق من قدرة التحمل للتخزين العمودي والتكديس. يمنع التشوه أثناء التخزين.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <path d="M3 19h16M7 19V9l4-6 4 6v10"/>
+              <path d="M9 19v-4h4v4"/>
+            </svg>
+          </div>
+          <div>
+            <h3>استقرار الأبعاد</h3>
+            <p>بعد المعالجة الحرارية، يتم قياس استقامة الأنابيب (بحد أقصى 1.5 ملم/متر) لمواجهة التغيرات في الرطوبة.</p>
+          </div>
+        </div>
+        <div class="lab-test">
+          <div class="lab-test-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round">
+              <path d="M6 2v10l5 3 5-3V2"/><path d="M6 7h10"/>
+            </svg>
+          </div>
+          <div>
+            <h3>التحكم في الرطوبة</h3>
+            <p>يتم الحفاظ عليها بين 4–6% لضمان السلامة الهيكلية. يتم اختبارها لكل دفعة باستخدام أجهزة قياس رطوبة معايرة.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="measurements" id="measurements">
+  <div class="reveal">
+    <p class="section-label">الأبعاد والتفاوتات</p>
+    <h2 class="section-title">كل مقاس<br><strong>مصمم حسب المواصفات</strong></h2>
+  </div>
+  <div class="meas-grid reveal">
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="34" stroke="#e8dfc8" stroke-width="12" fill="none"/>
+          <circle cx="40" cy="40" r="18" stroke="#5a9a3a" stroke-width="3" fill="none" stroke-dasharray="4 3"/>
+          <line x1="22" y1="40" x2="58" y2="40" stroke="#2a4a1e" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="40" cy="40" r="2" fill="#2a4a1e"/>
+          <text x="40" y="27" text-anchor="middle" font-size="7" fill="#5a5a44" font-family="Cairo">القطر الداخلي ⌀</text>
+        </svg>
+      </div>
+      <div class="meas-val">50–279</div>
+      <div class="meas-unit">ملم القطر الداخلي</div>
+      <div class="meas-desc">6 أحجام قياسية: 50، 60، 76، 100، 152، 279 ملم. أحجام مخصصة عند الطلب.</div>
+      <span class="meas-range">6 أحجام قياسية</span>
+    </div>
+
+    <div class="meas-card highlight">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <circle cx="40" cy="40" r="34" stroke="rgba(200,169,110,0.5)" stroke-width="14" fill="none"/>
+          <circle cx="40" cy="40" r="20" stroke="rgba(200,169,110,0.9)" stroke-width="2" fill="none"/>
+          <line x1="40" y1="6" x2="40" y2="26" stroke="#c8a96e" stroke-width="1.5"/>
+          <line x1="40" y1="54" x2="40" y2="74" stroke="#c8a96e" stroke-width="1.5"/>
+          <text x="47" y="40" font-size="6.5" fill="#c8a96e" font-family="Cairo" dominant-baseline="middle">الجدار</text>
+        </svg>
+      </div>
+      <div class="meas-val">3–17</div>
+      <div class="meas-unit">ملم سُمك الجدار</div>
+      <div class="meas-desc">3 ملم للتغليف الخفيف. 17 ملم للتطبيقات الصناعية الثقيلة التي تتطلب أقصى قدر من المقاومة.</div>
+      <span class="meas-range">خفيف ← عالي المقاومة</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <rect x="15" y="25" width="50" height="30" rx="4" stroke="#e8dfc8" stroke-width="2" fill="none"/>
+          <rect x="20" y="30" width="40" height="20" rx="3" stroke="#5a9a3a" stroke-width="2" fill="none"/>
+          <line x1="15" y1="68" x2="65" y2="68" stroke="#2a4a1e" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="15" y1="63" x2="15" y2="73" stroke="#2a4a1e" stroke-width="1.5"/>
+          <line x1="65" y1="63" x2="65" y2="73" stroke="#2a4a1e" stroke-width="1.5"/>
+          <text x="40" y="76" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="Cairo">الطول</text>
+        </svg>
+      </div>
+      <div class="meas-val">10–4000</div>
+      <div class="meas-unit">ملم طول القطع</div>
+      <div class="meas-desc">من 10 ملم للحلقات القصيرة إلى 4000 ملم (4 أمتار) للأنابيب الطويلة. تُقطع حسب متطلباتك.</div>
+      <span class="meas-range">تفاوت ±1.5 ملم</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <line x1="20" y1="20" x2="60" y2="60" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="20" y1="22" x2="20" y2="18" stroke="#2a4a1e" stroke-width="1.5"/>
+          <line x1="60" y1="62" x2="60" y2="58" stroke="#2a4a1e" stroke-width="1.5"/>
+          <circle cx="38" cy="44" r="3" fill="rgba(90,154,58,.2)" stroke="#5a9a3a" stroke-width="1.5"/>
+          <text x="40" y="18" text-anchor="middle" font-size="7" fill="#5a5a44" font-family="Cairo">الاستقامة</text>
+        </svg>
+      </div>
+      <div class="meas-val">≤1.5</div>
+      <div class="meas-unit">ملم / متر طولي</div>
+      <div class="meas-desc">أقصى انحراف مسموح به في الاستقامة. يتم التحقق منه بواسطة القياس بالليزر على كل دفعة إنتاج.</div>
+      <span class="meas-range">استقامة مضمونة</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <path d="M20 55 Q40 20 60 55" stroke="#5a9a3a" stroke-width="2" fill="none"/>
+          <line x1="20" y1="55" x2="60" y2="55" stroke="#e8dfc8" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="30" cy="44" r="3" fill="#5a9a3a"/>
+          <circle cx="50" cy="44" r="3" fill="#5a9a3a"/>
+          <text x="40" y="70" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="Cairo">% الرطوبة</text>
+        </svg>
+      </div>
+      <div class="meas-val">4–6</div>
+      <div class="meas-unit">% نسبة الرطوبة</div>
+      <div class="meas-desc">مستوى الرطوبة الأمثل للحفاظ على الأداء الهيكلي والاستقرار في الأبعاد أثناء التخزين.</div>
+      <span class="meas-range">يتم التحقق لكل دفعة</span>
+    </div>
+
+    <div class="meas-card">
+      <div class="meas-diagram">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <rect x="20" y="15" width="40" height="50" rx="3" stroke="#e8dfc8" stroke-width="2" fill="none"/>
+          <path d="M20 30h40M20 45h40" stroke="#e8dfc8" stroke-width="1" stroke-dasharray="2 2"/>
+          <path d="M30 15v50M50 15v50" stroke="#5a9a3a" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="40" cy="40" r="5" fill="rgba(90,154,58,.15)" stroke="#5a9a3a" stroke-width="1.5"/>
+          <text x="40" y="72" text-anchor="middle" font-size="6.5" fill="#5a5a44" font-family="Cairo">التركيب</text>
+        </svg>
+      </div>
+      <div class="meas-val">100%</div>
+      <div class="meas-unit">سيليلوز قابل لإعادة التدوير</div>
+      <div class="meas-desc">ألياف كرافت وتستلاينر. بدون إضافات. قابل للتحلل وإعادة التدوير بالكامل — متوافق مع متطلبات الاتحاد الأوروبي البيئية.</div>
+      <span class="meas-range">مادة معتمدة بيئياً</span>
+    </div>
+  </div>
+</section>
+
+<section class="specs" id="specs">
+  <div class="reveal">
+    <p class="section-label">المواصفات الفنية الكاملة</p>
+    <h2 class="section-title">ورقة البيانات<br><strong>الفنية</strong></h2>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-table reveal">
+      <div class="spec-table-header">الخصائص الفنية</div>
+      <div class="spec-row"><span class="spec-key">الأقطار الداخلية</span><span class="spec-val">50 / 60 / 76 / 100 / 152 / 279 mm</span></div>
+      <div class="spec-row"><span class="spec-key">سُمك الجدار</span><span class="spec-val">3 mm – 17 mm</span></div>
+      <div class="spec-row"><span class="spec-key">طول القطع</span><span class="spec-val">10 mm – 4 000 mm</span></div>
+      <div class="spec-row"><span class="spec-key">نسبة التفاوت في القطع</span><span class="spec-val">± 1.5 mm</span></div>
+      <div class="spec-row"><span class="spec-key">الاستقامة</span><span class="spec-val">Max 1.5 mm / m</span></div>
+      <div class="spec-row"><span class="spec-key">نسبة الرطوبة</span><span class="spec-val">4% – 6%</span></div>
+      <div class="spec-row"><span class="spec-key">التركيب</span><span class="spec-val">100% كرافت / تستلاينر قابل لإعادة التدوير</span></div>
+      <div class="spec-row"><span class="spec-key">المادة اللاصقة</span><span class="spec-val">سيليكات أو فينيل (عالي التماسك)</span></div>
+      <div class="spec-row"><span class="spec-key">تشطيب السطح</span><span class="spec-val">كرافت قياسي · مصقول (اختياري)</span></div>
+      <div class="spec-row"><span class="spec-key">نوع اللف</span><span class="spec-val">لف حلزوني</span></div>
+    </div>
+    <div class="specs-features reveal">
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="3"/></svg></div>
+        <div><h3>الضغط الشعاعي</h3><p>يقاوم قوى الشد أثناء عملية اللف. يتم اختباره داخليًا على كل دفعة.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><rect x="4" y="6" width="14" height="12" rx="2"/><path d="M4 10h14M11 10v8"/></svg></div>
+        <div><h3>قدرة التحمل المحورية</h3><p>يتحمل أعباء التخزين العمودي. سُمك الجدار يصل إلى 17 ملم للاستخدام الشاق.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><path d="M11 3v3M11 16v3M4 7.5l2.5 1.5M15.5 13l2.5 1.5M4 14.5l2.5-1.5M15.5 9l2.5-1.5"/></svg></div>
+        <div><h3>استقرار الأبعاد</h3><p>معالج حرارياً لضمان السلامة الهيكلية في مواجهة تغيرات درجات الحرارة والرطوبة.</p></div>
+      </div>
+      <div class="spec-feature">
+        <div class="spec-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#5a9a3a" stroke-width="2" stroke-linecap="round"><path d="M4 4h14M4 8h8M4 12h4"/><circle cx="16" cy="15" r="4"/><path d="M16 12.5v2.5l1.5 1.5"/></svg></div>
+        <div><h3>دقة القطع</h3><p>أي طول من 10 ملم إلى 4000 ملم. قطع دقيق بنسبة تفاوت ± 1.5 ملم فقط.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="reveal">
+    <p class="section-label">لماذا MilTube</p>
+    <h2 class="section-title">الجودة والموثوقية<br><strong>حول العالم</strong></h2>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-card"><div class="why-num">01</div><h3>مُختبر معملياً</h3><p>يتم اختبار الضغط الشعاعي والمحوري، وكذلك نسبة الرطوبة داخلياً قبل كل عملية شحن.</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>100% صديق للبيئة</h3><p>نستخدم ألياف السيليلوز القابلة لإعادة التدوير فقط. بناء من الكرافت والتستلاينر متوافق مع معايير الاستدامة.</p></div>
+    <div class="why-card"><div class="why-num">03</div><h3>مخصص بالكامل</h3><p>القطر الداخلي 50–279 ملم، الجدار 3–17 ملم، الطول 10–4000 ملم. يُصنع تماماً وفقاً لمواصفاتك.</p></div>
+    <div class="why-card"><div class="why-num">04</div><h3>جاهز للتصدير</h3><p>صُنع في الجزائر وفقاً للمعايير الدولية. أسعار تنافسية ومواعيد تسليم موثوقة للمشترين حول العالم.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">اتصل بنا وطلب عرض سعر</p>
+    <h2 class="section-title">اطلب عرض سعر<br><strong>من أي مكان في العالم</strong></h2>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <h3>أخبرنا باحتياجاتك من الأنابيب الكرتونية</h3>
+      <p>حدد القطر الداخلي، سُمك الجدار، طول القطع والكمية المطلوبة. سنقوم بإعداد عرض فني وتجاري شامل لك خلال 24 إلى 48 ساعة.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M1 4l7 5 7-5"/></svg></div>
+        <span dir="ltr">contact@miltube.com</span>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 2h4l1.5 3L5.5 6.2a7.5 7.5 0 004.3 4.3L11 8.5 14 10v4a1 1 0 01-1 1C5 15 1 11 1 3a1 1 0 011-1z"/></svg></div>
+        <span dir="ltr">+213 (0) — — — — — —</span>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="6" r="2.5"/><path d="M8 1C5.2 1 3 3.2 3 6c0 3.5 5 9 5 9s5-5.5 5-9c0-2.8-2.2-5-5-5z"/></svg></div>
+        ميلة/زغاية، الجزائر
+      </div>
+      <div style="margin-top:2rem;padding:1.4rem;background:rgba(90,154,58,.08);border-radius:12px;border:1px solid rgba(90,154,58,.2)">
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.7;margin:0"><strong style="display:block;color:var(--gd);margin-bottom:.3rem">وثائق جاهزة للتصدير</strong>يتم توفير أوراق البيانات الفنية، شهادات المطابقة وقوائم التعبئة لجميع الشحنات الدولية.</p>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row-2">
+        <div class="form-row"><label class="form-label">الاسم الأول</label><input type="text" class="form-input" placeholder="محمد"></div>
+        <div class="form-row"><label class="form-label">الاسم العائلي</label><input type="text" class="form-input" placeholder="أحمد"></div>
+      </div>
+      <div class="form-row"><label class="form-label">الشركة</label><input type="text" class="form-input" placeholder="اسم شركتك"></div>
+      <div class="form-row"><label class="form-label">البلد</label>
+        <select class="form-select">
+          <option>اختر بلدك…</option>
+          <option>الجزائر</option><option>المغرب</option><option>تونس</option>
+          <option>فرنسا</option><option>ألمانيا</option><option>إسبانيا</option>
+          <option>إيطاليا</option><option>المملكة المتحدة</option><option>بلجيكا</option>
+          <option>هولندا</option><option>تركيا</option><option>مصر</option>
+          <option>المملكة العربية السعودية</option><option>الإمارات العربية المتحدة</option><option>السنغال</option>
+          <option>ساحل العاج</option><option>أخرى</option>
+        </select>
+      </div>
+      <div class="form-row-2">
+        <div class="form-row"><label class="form-label">القطر الداخلي</label>
+          <select class="form-select" dir="ltr">
+            <option>50 mm</option><option>60 mm</option><option>76 mm (3")</option>
+            <option>100 mm</option><option>152 mm (6")</option><option>279 mm (11")</option>
+          </select>
+        </div>
+        <div class="form-row"><label class="form-label">الكمية (وحدة)</label><input type="number" class="form-input" placeholder="مثال: 5000"></div>
+      </div>
+      <div class="form-row"><label class="form-label">سُمك الجدار (ملم)</label><input type="text" class="form-input" placeholder="مثال: 7 ملم"></div>
+      <div class="form-row"><label class="form-label">طول القطع (ملم)</label><input type="text" class="form-input" placeholder="مثال: 1500 ملم"></div>
+      <div class="form-row"><label class="form-label">رسالة / متطلبات خاصة</label><textarea class="form-textarea" placeholder="التطبيق، تشطيب السطح (قياسي/مصقول)، أو أي مواصفات أخرى…"></textarea></div>
+      <button class="form-submit" onclick="alert('شكراً لك! تم استلام طلبك بنجاح. سنتواصل معك خلال 24 إلى 48 ساعة.')">إرسال طلب عرض السعر ←</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="logo">
+      <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="#8cc660" stroke-width="2.5" fill="none"/><circle cx="13" cy="13" r="4" fill="#8cc660"/></svg></div>
+      <span class="logo-text">Mil<span style="color:#8cc660">Tube</span></span>
+    </div>
+    <p>أنابيب كرتون حلزونية مصنوعة في الجزائر وفقاً للمعايير الصناعية الدولية. مورد موثوق للمصنعين وشركات التعبئة حول العالم.</p>
+    <div style="display:flex;gap:.7rem;margin-top:1.1rem;flex-wrap:wrap;">
+      <span class="cert-badge">100% قابل لإعادة التدوير</span>
+      <span class="cert-badge">جاهز للتصدير</span>
+      <span class="cert-badge">مُختبر معملياً</span>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>المنتجات</h4>
+    <ul>
+      <li><a href="#">أنابيب 50 / 60 ملم</a></li>
+      <li><a href="#">أنابيب 76 ملم (3 بوصة)</a></li>
+      <li><a href="#">أنابيب 100 ملم</a></li>
+      <li><a href="#">أنابيب 152 ملم (6 بوصة)</a></li>
+      <li><a href="#">أنابيب 279 ملم (11 بوصة)</a></li>
+      <li><a href="#">أبعاد مخصصة</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>الشركة</h4>
+    <ul>
+      <li><a href="#">معلومات عن MilTube</a></li>
+      <li><a href="#">المختبر والجودة</a></li>
+      <li><a href="#">ورقة البيانات الفنية</a></li>
+      <li><a href="#">التصدير والشحن</a></li>
+      <li><a href="#">طلب عرض سعر</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 MilTube — ميلة/زغاية، الجزائر</span>
+  <span>أنابيب كرتون حلزونية · تصدير عالمي</span>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
