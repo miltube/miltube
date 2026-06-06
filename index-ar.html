@@ -19,6 +19,15 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 /* NAV & LANG SWITCHER */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(247,243,236,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,154,58,0.15)}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+
+/* Ajustement de la taille du logo dans la barre de navigation */
+.logo-img {
+  height: 45px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .logo-icon{width:auto;height:auto;background:var(--gd);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .logo-text{font-family:var(--fd);font-size:1.45rem;font-weight:700;color:var(--gd);letter-spacing:.02em}
 .logo-text span{color:var(--ga);font-weight:400}
@@ -131,7 +140,7 @@ section{padding:6rem 4rem}
 .meas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
 .meas-card{background:var(--cream);border-radius:16px;padding:2rem;border:1px solid var(--sand);text-align:center;transition:transform .2s,box-shadow .2s}
 .meas-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.07)}
-.meas-card.highlight{background:var(--gd);border-color:transparent;color:var(--white)}
+.meas-card.highlight nighttime{background:var(--gd);border-color:transparent;color:var(--white)}
 .meas-diagram{width:80px;height:80px;margin:0 auto 1.2rem;position:relative}
 .meas-val{font-family:var(--fd);font-size:2.2rem;font-weight:700;color:var(--gd);line-height:1;margin-bottom:.3rem;direction:ltr}
 .meas-card.highlight .meas-val{color:var(--kraft)}
@@ -189,6 +198,18 @@ section{padding:6rem 4rem}
 /* FOOTER */
 footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3rem}
 .footer-brand p{font-size:.85rem;line-height:1.7;margin-top:.8rem}
+
+/* Ajustement et espacement du logo dans le pied de page */
+.footer-logo {
+  margin-bottom: 1.2rem;
+}
+.footer-logo .logo-img {
+  height: 50px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .footer-col h4{font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:1.2rem}
 .footer-col ul{list-style:none}
 .footer-col ul li{margin-bottom:.6rem;font-size:.85rem}
@@ -220,7 +241,7 @@ footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:g
 
 <nav>
  <a href="#" class="logo">
-    <img src="logo-miltube" alt="شعار MilTube" class="logo-img" height="60">
+    <img src="logo-miltube.png" alt="شعار MilTube" class="logo-img">
   </a>
   <div class="nav-links">
     <ul>
@@ -284,7 +305,7 @@ footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:g
   </div>
   <div class="gallery-grid reveal">
     <div class="gallery-main">
-      <img src="MilTube — Gamme Standard & Haute Résistance.png"
+      <img src="Haute Résistance.png"
            alt="أنابيب كرتون مكدسة"
            onerror="this.src='https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=80'">
       <div class="photo-label">MilTube — الفئة القياسية وعالية المقاومة</div>
@@ -591,7 +612,7 @@ footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:g
   </div>
   <div class="why-grid reveal">
     <div class="why-card"><div class="why-num">01</div><h3>مُختبر معملياً</h3><p>يتم اختبار الضغط الشعاعي والمحوري، وكذلك نسبة الرطوبة داخلياً قبل كل عملية شحن.</p></div>
-    <div class="why-card"><div class="why-num">02</div><h3>100% صديق للبيئة</h3><p>نستخدم ألياف السيليلوز القابلة لإعادة التدوير فقط. بناء من الكرافت والتستلاينر متوافق مع معايير الاستدامة.</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>100% صديق للبيئة</h3><p>نستخدم ألياف السيليلوز القابلة لإعادة التدوير فقط. بناء من الكرافت والتستلاينر build متوافق مع معايير الاستدامة.</p></div>
     <div class="why-card"><div class="why-num">03</div><h3>مخصص بالكامل</h3><p>القطر الداخلي 50–279 ملم، الجدار 3–17 ملم، الطول 10–4000 ملم. يُصنع تماماً وفقاً لمواصفاتك.</p></div>
     <div class="why-card"><div class="why-num">04</div><h3>جاهز للتصدير</h3><p>صُنع في الجزائر وفقاً للمعايير الدولية. أسعار تنافسية ومواعيد تسليم موثوقة للمشترين حول العالم.</p></div>
   </div>
@@ -607,7 +628,7 @@ footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:g
       <h3>أخبرنا باحتياجاتك من الأنابيب الكرتونية</h3>
       <p>حدد القطر الداخلي، سُمك الجدار، طول القطع والكمية المطلوبة. سنقوم بإعداد عرض فني وتجاري شامل لك خلال 24 إلى 48 ساعة.</p>
       <div class="contact-detail">
-        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M1 4l7 5 7-5"/></svg></div>
+        <div class="contact-detail-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 01-1-1z"/><path d="M1 4l7 5 7-5"/></svg></div>
         <span dir="ltr">contact@miltube.com</span>
       </div>
       <div class="contact-detail">
@@ -658,10 +679,8 @@ footer{background:#111107;color:rgba(255,255,255,.5);padding:3rem 4rem;display:g
 
 <footer>
   <div class="footer-brand">
-    <div class="logo">
-      <img src="logo-miltube" alt="MilTube Logo" class="logo-img">
-      <div class="logo-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="9" stroke="#8cc660" stroke-width="2.5" fill="none"/><circle cx="13" cy="13" r="4" fill="#8cc660"/></svg></div>
-      <span class="logo-text">Mil<span style="color:#8cc660">Tube</span></span>
+    <div class="footer-logo">
+      <img src="logo-miltube.png" alt="MilTube Logo" class="logo-img">
     </div>
     <p>أنابيب كرتون حلزونية مصنوعة في الجزائر وفقاً للمعايير الصناعية الدولية. مورد موثوق للمصنعين وشركات التعبئة حول العالم.</p>
     <div style="display:flex;gap:.7rem;margin-top:1.1rem;flex-wrap:wrap;">
