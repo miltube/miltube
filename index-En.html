@@ -17,6 +17,28 @@ html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden}
 
 /* NAV & LANG SWITCHER */
+/* Amélioration du sélecteur de langue pour mobile */
+.lang-switcher {
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.lang-switcher a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--gd);
+  font-size: 14px;
+}
+
+/* Assurer la visibilité sur petit écran */
+@media (max-width: 600px) {
+  nav { padding: 10px 15px !important; }
+  .lang-switcher { padding: 5px 8px; }
+}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(247,243,236,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,154,58,0.15)}
 .logo{display:flex;align-items:center;text-decoration:none}
 .logo-links{display:flex;align-items:center;gap:2rem}
@@ -657,39 +679,49 @@ html[dir="rtl"] .whatsapp-float {
         <p style="font-size:.8rem;color:var(--muted);line-height:1.6;margin:0"><strong style="display:block;color:var(--gd);margin-bottom:.3rem">Export Documentation Ready</strong>All shipments are systematically accompanied by certified technical data sheets, customs layout packs, and compliant packing lists.</p>
       </div>
     </div>
-    <div class="contact-form reveal">
-      <div class="form-row-2">
-        <div class="form-row"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John"></div>
-        <div class="form-row"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe"></div>
-      </div>
-      <div class="form-row-2">
-  <div class="form-row"><label class="form-label">Company Name</label><input type="text" class="form-input" placeholder="Your corporate name"></div>
-  <div class="form-row"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@example.com"></div>
-</div>
-      <div class="form-row"><label class="form-label">Destination Country</label>
-        <select class="form-select">
-          <option>Select target country…</option>
-          <option>Algeria</option><option>Morocco</option><option>Tunisia</option>
-          <option>France</option><option>Germany</option><option>Spain</option>
-          <option>Italy</option><option>United Kingdom</option><option>Belgium</option>
-          <option>Netherlands</option><option>Turkey</option><option>Egypt</option>
-          <option>Saudi Arabia</option><option>UAE</option><option>Senegal</option>
-          <option>Ivory Coast</option><option>Other</option>
-        </select>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row"><label class="form-label">Required Core ID</label>
-          <select class="form-select">
-            <option>50 mm</option><option>60 mm</option><option>76 mm (3")</option>
-            <option>100 mm</option><option>152 mm (6")</option><option>279 mm (11")</option>
-          </select>
-        </div>
-        <div class="form-row"><label class="form-label">Volume Quantity (Units)</label><input type="number" class="form-input" placeholder="e.g. 5000"></div>
-      </div>
-      <div class="form-row"><label class="form-label">Target Wall Thickness (mm)</label><input type="text" class="form-input" placeholder="e.g. 7 mm"></div>
-      <div class="form-row"><label class="form-label">Exact Cut Length (mm)</label><input type="text" class="form-input" placeholder="e.g. 1500 mm"></div>
-      <div class="form-row"><label class="form-label">Message / Special Application Instructions</label><textarea class="form-textarea" placeholder="Detail your winding application, specific surface preferences (skived/ground), or custom metrics…"></textarea></div>
-      <button class="form-submit" onclick="alert('Thank you! Your quote request has been routed to our commercial office. We will contact you within 24–48 hours.')">Submit Quote Request →</button>
+    <form action="https://formsubmit.co/miltube43@gmail.com" method="POST" class="contact-form reveal">
+  
+  <input type="hidden" name="_subject" value="New Quote Request - MilTube Website">
+  <input type="hidden" name="_captcha" value="false">
+
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">First Name</label><input type="text" name="First_Name" class="form-input" placeholder="John" required></div>
+    <div class="form-row"><label class="form-label">Last Name</label><input type="text" name="Last_Name" class="form-input" placeholder="Doe" required></div>
+  </div>
+  
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Company Name</label><input type="text" name="Company" class="form-input" placeholder="Your corporate name" required></div>
+    <div class="form-row"><label class="form-label">Email Address</label><input type="email" name="Email" class="form-input" placeholder="you@example.com" required></div>
+  </div>
+
+  <div class="form-row"><label class="form-label">Destination Country</label>
+    <select name="Country" class="form-select" required>
+      <option value="">Select target country…</option>
+      <option value="Algeria">Algeria</option><option value="Morocco">Morocco</option><option value="Tunisia">Tunisia</option>
+      <option value="France">France</option><option value="Germany">Germany</option><option value="Spain">Spain</option>
+      <option value="Italy">Italy</option><option value="UK">United Kingdom</option><option value="Belgium">Belgium</option>
+      <option value="Netherlands">Netherlands</option><option value="Turkey">Turkey</option><option value="Egypt">Egypt</option>
+      <option value="Saudi Arabia">Saudi Arabia</option><option value="UAE">UAE</option><option value="Senegal">Senegal</option>
+      <option value="Ivory Coast">Ivory Coast</option><option value="Other">Other</option>
+    </select>
+  </div>
+  
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">Required Core ID</label>
+      <select name="Core_ID" class="form-select" required>
+        <option value="50mm">50 mm</option><option value="60mm">60 mm</option><option value="76mm">76 mm (3")</option>
+        <option value="100mm">100 mm</option><option value="152mm">152 mm (6")</option><option value="279mm">279 mm (11")</option>
+      </select>
+    </div>
+    <div class="form-row"><label class="form-label">Volume Quantity (Units)</label><input type="number" name="Quantity" class="form-input" placeholder="e.g. 5000" required></div>
+  </div>
+  
+  <div class="form-row"><label class="form-label">Target Wall Thickness (mm)</label><input type="text" name="Wall_Thickness" class="form-input" placeholder="e.g. 7 mm" required></div>
+  <div class="form-row"><label class="form-label">Exact Cut Length (mm)</label><input type="text" name="Cut_Length" class="form-input" placeholder="e.g. 1500 mm" required></div>
+  <div class="form-row"><label class="form-label">Message / Special Instructions</label><textarea name="Message" class="form-textarea" placeholder="Detail your winding application, specific surface preferences, or custom metrics…"></textarea></div>
+  
+  <button type="submit" class="form-submit">Submit Quote Request →</button>
+</form></button>
     </div>
   </div>
 </section>

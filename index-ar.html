@@ -17,6 +17,28 @@ html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden}
 
 /* NAV & LANG SWITCHER */
+/* Amélioration du sélecteur de langue pour mobile */
+.lang-switcher {
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.lang-switcher a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--gd);
+  font-size: 14px;
+}
+
+/* Assurer la visibilité sur petit écran */
+@media (max-width: 600px) {
+  nav { padding: 10px 15px !important; }
+  .lang-switcher { padding: 5px 8px; }
+}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(247,243,236,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(90,154,58,0.15)}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 
@@ -674,39 +696,45 @@ html[dir="rtl"] .whatsapp-float {
         <p style="font-size:.85rem;color:var(--muted);line-height:1.7;margin:0"><strong style="display:block;color:var(--gd);margin-bottom:.3rem">وثائق جاهزة للتصدير</strong>يتم توفير أوراق البيانات الفنية، شهادات المطابقة وقوائم التعبئة لجميع الشحنات الدولية.</p>
       </div>
     </div>
-    <div class="contact-form reveal">
-      <div class="form-row-2">
-        <div class="form-row"><label class="form-label">الاسم الأول</label><input type="text" class="form-input" placeholder="محمد"></div>
-        <div class="form-row"><label class="form-label">الاسم العائلي</label><input type="text" class="form-input" placeholder="أحمد"></div>
-      </div>
-      <div class="form-row-2">
-  <div class="form-row"><label class="form-label">الشركة</label><input type="text" class="form-input" placeholder="اسم شركتك"></div>
-  <div class="form-row"><label class="form-label">البريد الإلكتروني</label><input type="email" class="form-input" placeholder="email@example.com" dir="ltr"></div>
-</div>
-      <div class="form-row"><label class="form-label">البلد</label>
-        <select class="form-select">
-          <option>اختر بلدك…</option>
-          <option>الجزائر</option><option>المغرب</option><option>تونس</option>
-          <option>فرنسا</option><option>ألمانيا</option><option>إسبانيا</option>
-          <option>إيطاليا</option><option>المملكة المتحدة</option><option>بلجيكا</option>
-          <option>هولندا</option><option>تركيا</option><option>مصر</option>
-          <option>المملكة العربية السعودية</option><option>الإمارات العربية المتحدة</option><option>السنغال</option>
-          <option>ساحل العاج</option><option>أخرى</option>
-        </select>
-      </div>
-      <div class="form-row-2">
-        <div class="form-row"><label class="form-label">القطر الداخلي</label>
-          <select class="form-select" dir="ltr">
-            <option>50 mm</option><option>60 mm</option><option>76 mm (3")</option>
-            <option>100 mm</option><option>152 mm (6")</option><option>279 mm (11")</option>
-          </select>
-        </div>
-        <div class="form-row"><label class="form-label">الكمية (وحدة)</label><input type="number" class="form-input" placeholder="مثال: 5000"></div>
-      </div>
-      <div class="form-row"><label class="form-label">سُمك الجدار (ملم)</label><input type="text" class="form-input" placeholder="مثال: 7 ملم"></div>
-      <div class="form-row"><label class="form-label">طول القطع (ملم)</label><input type="text" class="form-input" placeholder="مثال: 1500 ملم"></div>
-      <div class="form-row"><label class="form-label">رسالة / متطلبات خاصة</label><textarea class="form-textarea" placeholder="التطبيق، تشطيب السطح (قياسي/مصقول)، أو أي مواصفات أخرى…"></textarea></div>
-      <button class="form-submit" onclick="alert('شكراً لك! تم استلام طلبك بنجاح. سنتواصل معك خلال 24 إلى 48 ساعة.')">إرسال طلب عرض السعر ←</button>
+   <form action="https://formsubmit.co/miltube43@gmail.com" method="POST" class="contact-form reveal">
+  
+  <input type="hidden" name="_subject" value="طلب عرض سعر جديد - من الموقع العربي">
+  <input type="hidden" name="_captcha" value="false">
+
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">الاسم الأول</label><input type="text" name="First_Name" class="form-input" placeholder="الاسم" required></div>
+    <div class="form-row"><label class="form-label">اللقب</label><input type="text" name="Last_Name" class="form-input" placeholder="اللقب" required></div>
+  </div>
+  
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">اسم الشركة</label><input type="text" name="Company" class="form-input" placeholder="اسم شركتكم" required></div>
+    <div class="form-row"><label class="form-label">البريد الإلكتروني</label><input type="email" name="Email" class="form-input" placeholder="email@example.com" required></div>
+  </div>
+
+  <div class="form-row"><label class="form-label">البلد</label>
+    <select name="Country" class="form-select" required>
+      <option value="">اختر بلد الوجهة...</option>
+      <option value="Algeria">الجزائر</option><option value="Morocco">المغرب</option><option value="Tunisia">تونس</option>
+      <option value="Egypt">مصر</option><option value="Saudi Arabia">السعودية</option><option value="Other">بلد آخر</option>
+    </select>
+  </div>
+  
+  <div class="form-row-2">
+    <div class="form-row"><label class="form-label">قطر الأنبوب (Core ID)</label>
+      <select name="Core_ID" class="form-select" required>
+        <option value="50mm">50 مم</option><option value="76mm">76 مم (3 بوصة)</option><option value="100mm">100 مم</option>
+        <option value="152mm">152 مم (6 بوصة)</option>
+      </select>
+    </div>
+    <div class="form-row"><label class="form-label">الكمية المطلوبة</label><input type="number" name="Quantity" class="form-input" placeholder="مثال: 5000" required></div>
+  </div>
+  
+  <div class="form-row"><label class="form-label">سماكة الجدار (مم)</label><input type="text" name="Wall_Thickness" class="form-input" placeholder="مثال: 7 مم" required></div>
+  <div class="form-row"><label class="form-label">الطول المطلوب (مم)</label><input type="text" name="Cut_Length" class="form-input" placeholder="مثال: 1500 مم" required></div>
+  <div class="form-row"><label class="form-label">رسالة إضافية</label><textarea name="Message" class="form-textarea" placeholder="أدخل أي تفاصيل إضافية هنا..."></textarea></div>
+  
+  <button type="submit" class="form-submit">إرسال طلب عرض السعر ←</button>
+</form></button>
     </div>
   </div>
 </section>
